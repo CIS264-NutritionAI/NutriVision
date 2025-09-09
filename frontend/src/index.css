@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Teachers&display=swap');
+@import './assets/fonts/fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base body styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Monospace for code elements */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Always reserve space for vertical scrollbar to avoid layout shift */
+html {
+  overflow-y: scroll;
+}
+
+/* Scrollbar: Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  visibility: hidden;
+  transition: visibility 0.2s ease-in-out;
+}
+
+body:hover ::-webkit-scrollbar-thumb,
+body:active ::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+/* Scrollbar: Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
