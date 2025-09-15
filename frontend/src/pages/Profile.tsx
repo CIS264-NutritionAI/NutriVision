@@ -31,6 +31,14 @@ const Profile = () => {
         >
           <h1 className="font-semibold">create an account</h1>
         </Link>
+
+        <Link
+          to="/results"
+          className="border border-charcoal inline-block bg-cream text-charcoal px-8 py-6 rounded-full 
+      text-sm hover:bg-charcoal hover:text-cream hover:border-cream"
+        >
+          <h1 className="font-semibold">view previous scan results</h1>
+        </Link>
       </div>
 
 
