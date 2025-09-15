@@ -7,9 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        matcha: '#A0BC4B',
+        matcha: '#B2C98B',
         caramel: '#FFF7F0',
         cream: '#FFFBF8',
+        charcoal: '#4A4A4A'
+      },
+      fontFamily: {
+        peppermint: ['Peppermint', 'cursive'],
+        heolgun: ['Heolgun', 'sans-serif'],
       },
     },
   },

@@ -1,13 +1,15 @@
+/* handwritten */ 
 @font-face {
-  font-family: 'Bosk';
-  src: url('./Bosk.ttf') format('truetype');
+  font-family: 'Heolgun';
+  src: url('./Heolgun-PV5p7.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
+/* print */
 @font-face {
-  font-family: 'Biski';
-  src: url('./BiskiTrial-Regular.otf') format('opentype');
+  font-family: 'Peppermint';
+  src: url('./PeppermintPenMedium-MAmzJ.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
