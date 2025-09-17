@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavButton from "./NavButton";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function NavBar() {
     const [open, setOpen] = useState(false);
 
     return (
