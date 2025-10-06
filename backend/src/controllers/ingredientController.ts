@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Ingredient } from '../models/ingredient';
+import { Ingredient } from '../models/Ingredient';
 import { analyzeIngredients } from '../services/huggingFaceServices';
 
 export const createIngredient = async (req: Request, res: Response) => {
