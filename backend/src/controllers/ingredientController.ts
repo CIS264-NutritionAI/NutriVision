@@ -1,33 +1,23 @@
-import { Request, Response } from 'express';
-import { Ingredient } from '../models/Ingredient';
-import { analyzeIngredients } from '../services/huggingFaceServices';
+import { Request, Response } from "express";
+import { analyzeIngredients } from "../services/huggingFaceServices.js";
+import { allergens } from "../utils/allergenList.js";
+import { NERItem } from "../types/ner.js";
 
-export const createIngredient = async (req: Request, res: Response) => {
-    try {
-        const { name, ocrText } = req.body;
+export const processLabel = async (req: Request, res: Response) => {
+  try {
+    const { text } = req.body;
 
-        const hfResult = await analyzeIngredients(ocrText);
-        const topLabel = hfResult?.[0]?.label || 'unknown';
+    const nerResults: NERItem[] = await analyzeIngredients(text);
 
-        const ingredient = await Ingredient.create({
-            name,
-            ocrText,
-            category: topLabel.toLowerCase()
-        });
+    const ingredients: string[] = nerResults.map(item => item.entity);
 
-        res.status(201).json(ingredient);
-    } catch (err: any) {
-        console.error(err);
-        res.status(500).json({ error: err.message || 'Failed to create ingredient' });
-    }
-};
+    const flaggedAllergens = ingredients.filter(ing =>
+      allergens.includes(ing.toLowerCase())
+    );
 
-export const getIngredients = async (_req: Request, res: Response) => {
-    try {
-        const ingredients = await Ingredient.findAll();
-        res.json(ingredients);
-    } catch (err: any) {
-        console.error(err);
-        res.status(500).json({ error: err.message || 'Failed to fetch ingredients' });
-    }
+    res.json({ ingredients, flaggedAllergens });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to analyze ingredients" });
+  }
 };
