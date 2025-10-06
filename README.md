@@ -16,9 +16,11 @@ In addition to allergens, we also intend to highlight users' intake of excessive
 * Frontend: React, TypeScript, and Tailwind CSS
 * Backend: Node, Express
 * Database: MongoDB
-Our team decided on using a typical MERN web stack, adding TypeScript and Tailwind CSS for a more modern styling alternative in addition to lowering the learning curve. We initially went with a PERN stack due to PostgreSQL's presence as an industry standard, but quickly switched back to MongoDB to lessen the learning curve. 
 * CV Tools: Hugging Face Transformers Model (DistilBERT), Tesseract.js
-Our team initially decided upon training the LLM from scratch, but due to other underlying factors such as school and life, we decided on imnplementing a pre-trained model in the form of DistilBERT, a well-known food-identifying LLM capable of identifying ingredients and macronutrients. We also intended to use Google Vision at the start, but at the end, we realized by implementing Tesseract.js, an open-sourced OCR project, the implementation of Google Vision Client would be redundant.
 * Containerization & Deployment: Vercel
 * Documentation & Testing: GitHub, Postman, Cypress
+
+# Stack Decisions
+Our team decided on using a typical MERN web stack, adding TypeScript and Tailwind CSS for a more modern styling alternative in addition to lowering the learning curve. We initially went with a PERN stack due to PostgreSQL's presence as an industry standard, but quickly switched back to MongoDB to lessen the learning curve. We also initially decided upon training the LLM from scratch, but due to other underlying factors such as school and life, we decided on imnplementing a pre-trained model in the form of DistilBERT, a well-known food-identifying LLM capable of identifying ingredients and macronutrients. We also intended to use Google Vision at the start, but at the end, we realized by implementing Tesseract.js, an open-sourced OCR project, the implementation of Google Vision Client would be redundant.
+
 
