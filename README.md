@@ -15,8 +15,9 @@ In addition to allergens, we also intend to highlight users' intake of excessive
 # Our Stack + Explanation
 * Frontend: React, TypeScript, and Tailwind CSS
 * Backend: Node, Express
-* Database: MongoDB
+* Database: MongoDB (AWS)
 * CV Tools: Hugging Face Transformers Model (DistilBERT), Tesseract.js
+* Cybersecurity & Authentication: Firebase Auth
 * Containerization & Deployment: Vercel
 * Documentation & Testing: GitHub, Postman, Cypress
 
@@ -24,5 +25,7 @@ In addition to allergens, we also intend to highlight users' intake of excessive
 Our team decided on using a typical MERN web stack, adding TypeScript and Tailwind CSS for a more modern styling alternative in addition to lowering the learning curve. We initially went with a PERN stack due to PostgreSQL's presence as an industry standard, but quickly switched back to MongoDB to lessen the learning curve. 
 
 We also initially decided upon training the LLM from scratch, but due to other underlying factors such as school and life, we decided on imnplementing a pre-trained model in the form of DistilBERT, a well-known food-identifying LLM capable of identifying ingredients and macronutrients. We also intended to use Google Vision at the start, but at the end, we realized by implementing Tesseract.js, an open-sourced OCR project, the implementation of Google Vision Client would be redundant.
+
+In addition, we decided on Firebase Auth for the lowest possible learning curve in order to produce a MVP suitable for the scale of our project. By using Vercel, we're able to develop a web application that not only hosts our website 24/7 but is extremely easy to setup and suits our learning curve. As for documentation and testing tools, we intend on using Google Docs for the assignment, but also using a README.md in the GitHub repository itself to demonstrate best documentation practices. Postman will be used to test backend endpoints, and Cypress will be used to test our web application from a client side point of view. We originally chose to implement Docker and Kubernetes along side with the rest of the developer tools, but in order to produce a MVP in the remaining 4 weeks, we intend on using Docker and Kubernetes for containerization only if time allows.
 
 
