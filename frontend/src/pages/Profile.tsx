@@ -25,7 +25,7 @@ const Profile = () => {
         </Link>
 
         <Link
-          to="/signups"
+          to="/signup"
           className="border border-charcoal inline-block bg-cream text-charcoal px-8 py-6 rounded-full 
       text-sm hover:bg-charcoal hover:text-cream hover:border-cream"
         >

@@ -5,7 +5,7 @@ import Profile from "./pages/Profile";
 import Results from "./pages/Results";
 import Scan from "./pages/Scan";
 import Login from "./pages/Login";
-import Signups from "./pages/Signups";
+import Signup from "./pages/Signup";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
             <Route path="/results" element={<Results />} />
             <Route path="/scan" element={<Scan />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signups" element={<Signups />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
       </div>
