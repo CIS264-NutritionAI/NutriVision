@@ -6,5 +6,7 @@ export const allergens = [
   "soy",
   "wheat",
   "fish",
-  "shellfish"
+  "shellfish",
+  "sesame"
+  // source: https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies
 ];
