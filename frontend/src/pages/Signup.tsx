@@ -1,5 +1,19 @@
 import { useState } from "react";
-import { signUp } from "../services/authService";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDOZ57dtsS1f1XAYC1lSE0Bsb0RdphGiCg",
+  authDomain: "nutrivision-11e29.firebaseapp.com",
+  projectId: "nutrivision-11e29",
+  storageBucket: "nutrivision-11e29.firebasestorage.app",
+  messagingSenderId: "1002919080951",
+  appId: "1:1002919080951:web:4d17d8f43a86bc947674f2",
+  measurementId: "G-WN6HM4GSSC",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -15,9 +29,8 @@ export default function Signup() {
     }
 
     try {
-      await signUp(email, password);
-      alert("Account created successfully!");
-      // Optionally, redirect to login page
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      alert("Account created successfully! Welcome " + userCredential.user.email);
     } catch (error: any) {
       alert("Signup failed: " + error.message);
     }
