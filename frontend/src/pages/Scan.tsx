@@ -37,7 +37,7 @@ const Scan = () => {
   return (
     <div className="relative w-full overflow-hidden tracking-wide font-peppermint bg-cream min-h-screen flex flex-col items-center px-4">
       <h1 className="text-md sm:text-mg md:text-lg lg:text-xl pt-12 text-left flex justify-between">
-        Analyze nutritional labels in seconds. Scan an image on desktop or mobile to get started. Make sure 
+        Analyze nutritional labels in seconds. Scan an image on desktop or mobile to get started. 
       </h1>
 
       {/* Webcam */}
