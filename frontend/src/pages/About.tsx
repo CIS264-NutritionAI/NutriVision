@@ -7,7 +7,7 @@ const About = () => {
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl pt-12 text-center">
           about nutrivision.
         </h1>
-        <h3 className="text-md sm:text-xl md:text-2xl lg:text-4xl text-center py-12 mx-6 sm:mx-20">
+        <h3 className="text-sm sm:text-md md:text-lg lg:text-xl text-left justify-left py-12 mx-6 sm:mx-20">
           nutrivision is an AI-powered web-based health application designed to
           educate users on potentially harmful ingredients, minerals, chemicals,
           and allergens.
