@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Scan from "./pages/Scan";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import History from "./pages/History";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/scan" element={<Scan />} />
+            <Route path="/history" element={<History />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
