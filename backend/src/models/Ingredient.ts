@@ -1,40 +1,30 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import mongoose from 'mongoose'; 
+const { Schema } = mongoose; 
 
-export interface IngredientAttributes {
-  id?: number;
-  name: string;
-  isAllergen: boolean;
+// What an ingredient looks like 
+interface IngredientAttributes {
+  _id: string; 
+  name: string; 
+  isAllergen: boolean; 
+  createdAt: Date; 
+  updatedAt: Date; 
 }
 
-export class Ingredient extends Model<IngredientAttributes> implements IngredientAttributes {
-  public id!: number;
-  public name!: string;
-  public isAllergen!: boolean;
+const ingredientSchema = new mongoose.Schema<IngredientAttributes>({ 
+  name: { 
+    type: String, 
+    required: true,
+  }, 
+  isAllergen: { 
+    type: Boolean, 
+    required: true,
+  },
+}, {
+  timestamps: true, // Adds "createdAt and updatedAt"
+});
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+// Create a model from the schema 
+const Ingredient = mongoose.model<IngredientAttributes>('Ingredient', ingredientSchema)
 
-  static initialize(sequelize: Sequelize) {
-    Ingredient.init(
-      {
-        id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
-          primaryKey: true,
-        },
-        name: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        isAllergen: {
-          type: DataTypes.BOOLEAN,
-          defaultValue: false,
-        },
-      },
-      {
-        tableName: "ingredients",
-        sequelize,
-      }
-    );
-  }
-}
+// Export model to use throughout application 
+export default Ingredient;
