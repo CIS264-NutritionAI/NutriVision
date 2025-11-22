@@ -2,12 +2,57 @@ import { useRef, useState } from "react";
 import Webcam from "react-webcam";
 import Tesseract from "tesseract.js";
 
+
 const Scan = () => {
   const webcamRef = useRef<Webcam>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [text, setText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [facingMode, setFacingMode] = useState<"user" | "environment">("environment");
+
+  // Call AI 
+  const callAI = async (text: string) => {
+    const response = await fetch('http://localhost:3000/api/ingredients/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text }),
+    });
+    const data = await response.json();
+    return data;
+  };
+
+  // Save scan to database
+  const saveScanToDatabase = async (extractedText: string, image: string) => { 
+    try { 
+      const aiResults = await callAI(extractedText); // Use AI results
+      const lines = extractedText.split('\n').filter(line => line.trim());
+
+      const scanData = {
+        name: lines[0] || "Unknown",
+        ingredients: [extractedText],
+        allergens: aiResults.flaggedAllergens,
+        nutrition: {}, 
+        imageURL: image,
+      }; 
+
+      // Send scan data to backend 
+      const response = await fetch('http://localhost:3000/api/scans', {
+        method: 'POST', 
+        headers: { 
+          'Content-Type': 'application/json', 
+        }, 
+        body: JSON.stringify(scanData),
+      }); 
+      if (response.ok) { 
+        alert('Scan saved successfully'); 
+      } else {
+        alert('Failed to save scan'); 
+      }
+    } catch (error) {
+      console.error('Error saving scan:', error); 
+      alert('Error saving scan.');
+    }
+  }; 
 
   const scanImage = (image: string) => {
     setLoading(true);
@@ -16,7 +61,10 @@ const Scan = () => {
     Tesseract.recognize(image, "eng", {
       logger: (m) => console.log(m),
     })
-      .then(({ data: { text } }) => setText(text))
+      .then(({ data: { text } }) => { 
+        setText(text); 
+        saveScanToDatabase(text, image); // Save scan to database after extracting text
+      })
       .finally(() => setLoading(false));
   };
 
@@ -67,6 +115,28 @@ const Scan = () => {
         >
           Flip Camera
         </button>
+        
+        {/* Upload image button */}
+        <label className="border-2 border-blue-500 bg-blue-500 text-cream px-6 py-2 rounded-lg hover:bg-cream hover:text-blue-500 cursor-pointer text-center">
+          Upload Image
+          <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                const imageData = event.target?.result as string;
+                setImageSrc(imageData);
+                scanImage(imageData);
+              };
+              reader.readAsDataURL(file);
+            }
+          }}
+          className="hidden"
+          />
+        </label>
       </div>
 
       {/* Image Preview */}
