@@ -29,7 +29,7 @@ const Scan = () => {
 
       const scanData = {
         name: lines[0] || "Unknown",
-        nutrition: [extractedText],
+        ingredients: [extractedText],
         allergens: aiResults.flaggedAllergens,
         imageURL: image,
       }; 

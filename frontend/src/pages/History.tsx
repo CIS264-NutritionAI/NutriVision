@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 interface Scan {
   _id: string;
   name: string;
-  nutrition: string[];
+  ingredients: string[];
   allergens: string[]; 
   scannedAt: string;
   imageURL: string; 
@@ -86,14 +86,14 @@ function History() {
                     fontWeight: '600',
                     marginBottom: '4px'
                   }}>
-                    🥗 Nutrition:
+                    🥗 Ingredients:
                   </p>
                   <p style={{ 
                     fontSize: '14px',
                     color: '#555',
                     paddingLeft: '24px'
                   }}>
-                    {scan.nutrition.join(', ')}
+                    {scan.ingredients.join(', ')}
                   </p>
                 </div>
                 
