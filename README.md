@@ -1,31 +1,68 @@
 # NutriVision
-Hello everyone, we're the developer team behind NutriVision, a web-based health app designed to educate users on potential harmful ingredients including nutrition facts and common allergens using computer vision, image processing, and optical character recognition.
 
-# Situation
-Recently, we learned about macronutrients such as proteins, carbohydrates, fats, sugars, and sodium in our biology lecture, and its impact on our health. This piqued our interest in nutrition and introduce company tricks that disguise harmful processed ingredients such as MSG as monosodium glutamate on a food label or preservative ingredients like disodium glycerophosphate. Even companies disguise common allergens with small texts, causing those with visual impairments to miss key words in the "may contain" and "contains" sections of food labels. In addition, many common allergens in US-born humans are linked to other "ghost allergens", or in other words, allergens commonly linked with other allergens. For example, a common ghost allergen paired with peanuts are sesames and walnuts, and sometimes, humans with peanut allergens may get allergic reactions to foods they have not tested "allergic" for, yet still receive an allergic reaction. 
+**NutriVision** is a web-based health application designed to educate users about potential harmful ingredients, nutrition facts, and common allergens using computer vision, image processing, and optical character recognition (OCR).  
 
-# Task
-We aim to create an AI-powered web application called NutriVision, utilizing computer vision, image processing, and optical character recognition to identify excessive intake of macronutrients and signs of common allergens to inform clients about potential risks on food nutrition labels. 
+---
 
-# Action 
-In addition to allergens, we also intend to highlight users' intake of excessive amounts of various macronutrients according to the scanned nutrition label. For future installments, we intend to consider health issues such as diabetes and suggest warnings based on a human's dietary restrictions and health restrictions.
+## Overview  
 
-# Result
+Our motivation stems from a growing interest in nutrition and understanding macronutrients—proteins, carbohydrates, fats, sugars, and sodium—and their impact on human health. We also noticed that food labels often obscure harmful ingredients (e.g., MSG listed as monosodium glutamate) or allergens in small fonts, making them difficult to detect for visually impaired users. Additionally, some allergens are linked with “cross-reactive” or “ghost” allergens—for instance, individuals allergic to peanuts may also react to sesame or walnuts.  
 
-# Our Stack + Explanation
-* Frontend: React, TypeScript, and Tailwind CSS
-* Backend: Node, Express
-* Database: MongoDB (AWS)
-* CV Tools: Hugging Face Transformers Model (DistilBERT), Tesseract.js
-* Cybersecurity & Authentication: Firebase Auth
-* Containerization & Deployment: Vercel
-* Documentation & Testing: GitHub, Postman, Cypress
+NutriVision addresses these challenges by leveraging AI-powered image analysis to detect:  
+- Excessive macronutrient intake based on nutrition labels  
+- Presence of common allergens and related “ghost allergens”  
 
-# Stack Decisions
-Our team decided on using a typical MERN web stack, adding TypeScript and Tailwind CSS for a more modern styling alternative in addition to lowering the learning curve. We initially went with a PERN stack due to PostgreSQL's presence as an industry standard, but quickly switched back to MongoDB to lessen the learning curve. 
+Future iterations may incorporate dietary restrictions and health conditions, such as diabetes, to provide personalized nutritional warnings.  
 
-We also initially decided upon training the LLM from scratch, but due to other underlying factors such as school and life, we decided on imnplementing a pre-trained model in the form of DistilBERT, a well-known food-identifying LLM capable of identifying ingredients and macronutrients. We also intended to use Google Vision at the start, but at the end, we realized by implementing Tesseract.js, an open-sourced OCR project, the implementation of Google Vision Client would be redundant.
+---
 
-In addition, we decided on Firebase Auth for the lowest possible learning curve in order to produce a MVP suitable for the scale of our project. By using Vercel, we're able to develop a web application that not only hosts our website 24/7 but is extremely easy to set up and suits our learning curve. As for documentation and testing tools, we intend on using Google Docs for the assignment, but also using a README.md in the GitHub repository itself to demonstrate best documentation practices. Postman will be used to test backend endpoints, and Cypress will be used to test our web application from a client side point of view. We originally chose to implement Docker and Kubernetes alongside with the rest of the developer tools, but in order to produce a MVP in the remaining 4 weeks, we intend on using Docker and Kubernetes for containerization only if time allows.
+## Features  
 
+- **Nutrition Analysis:** Detect excessive intake of macronutrients and provide warnings.  
+- **Allergen Detection:** Identify common allergens and associated cross-reactive allergens using a combination of OCR and lookup tables.  
+- **History Tracking:** Timestamped scan history for users.  
 
+---
+
+## Tech Stack  
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Frontend | React, TypeScript, Tailwind CSS | UI/UX, component-based architecture |
+| Backend | Node.js, Express | REST API endpoints |
+| Database | MongoDB (AWS) | NoSQL storage of user scan history and nutritional data |
+| OCR & CV | Tesseract.js, Hugging Face Transformers (DistilBERT) | Text extraction and ingredient classification |
+| Authentication | Firebase Auth | User authentication and management |
+| Deployment | Vercel | Continuous deployment and hosting |
+| Date Handling | Date-FNS | Timestamping and sorting scanned data |
+
+---
+
+## Stack Decisions & Rationale  
+
+1. **Web Application vs Mobile Application:**  
+   Initially, the team considered developing a mobile application using React Native in combination with Expo CLI. However, the steep learning curve and project timeline constraints made this approach less feasible. Mobile development would have enabled device-specific feature utilization and native camera integration, but distributing and showcasing the application through Expo Go introduced additional deployment complexity and accessibility limitations. Pivoting to a web application architecture allowed the team to significantly reduce overhead, focus on frontend development and UI/UX optimization, and deliver a more accessible platform without compromising on core functionality. Implementing a MERN-inspired stack with TypeScript and Tailwind CSS streamlined component development, reduced boilerplate code, and ensured maintainable, scalable architecture.  
+
+2. **OCR and AI Integration:**  
+   While Hugging Face Transformers provide advanced NLP and classification capabilities, direct integration with mobile device cameras introduced technical challenges and slowed rapid prototyping. To address the primary challenge of extracting and analyzing nutrition label data, Tesseract.js was selected as the OCR engine due to its open-source nature, ease of integration, and cost-effectiveness. Text extracted through Tesseract is subsequently processed with a pretrained DistilBERT model to classify ingredients and identify potential allergens. A supplementary lookup table is used to accurately detect common allergens and cross-reactive “ghost allergens,” ensuring robust identification without solely relying on machine learning predictions.  
+
+3. **Authentication and Database Design:**  
+   Firebase Auth was chosen for its low learning curve, reliability, and secure user authentication capabilities, enabling rapid implementation of a login system without sacrificing privacy or user experience. MongoDB was selected as the database solution due to its flexibility in storing semi-structured user data, including scan history and nutritional information. The NoSQL schema minimizes complexity, reduces development overhead, and allows easy adaptation for future feature expansions, such as health-specific dietary restrictions.  
+
+4. **Testing and Documentation:**  
+   End-to-end testing with Cypress and API testing with Postman were initially considered to ensure comprehensive quality assurance. However, to meet strict project deadlines and balance workload across team members, these tools were deferred in favor of focusing on core functionality for the MVP. Documentation is maintained through both GitHub (README.md) and Google Docs to ensure clarity, version control, and adherence to best practices for professional software projects.  
+
+5. **Containerization and Deployment:**  
+   While Docker and Kubernetes were explored to standardize local development environments and enable scalable deployment, full orchestration was deemed excessive for the project timeline. Instead, deployment focuses on Vercel for continuous integration and hosting, allowing the web application to remain accessible 24/7. Containerization may be revisited in future iterations to enhance development consistency and facilitate multi-environment deployment.  
+
+6. **Timestamping and Data Management:**  
+   Date-FNS was incorporated to generate precise timestamps for each scanned label, allowing users to track scan history and sort entries in descending order. This feature provides transparency, improves user experience, and lays the foundation for future data analytics, including trend analysis of nutrient intake over time.  
+
+---
+
+## Future Directions  
+
+- Integration of dietary restrictions and health-specific warnings (e.g., diabetes, hypertension).  
+- Optional mobile app version for camera-native scanning.  
+- Enhanced AI-based ingredient recognition and allergen prediction.  
+- User accounts with secure privacy-preserving protocols like zkTLS.  
