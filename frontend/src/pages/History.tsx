@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 interface Scan {
   _id: string;
   name: string;
-  ingredients: string[];
+  nutrition: string[];
   allergens: string[]; 
   scannedAt: string;
   imageURL: string; 
@@ -93,7 +93,9 @@ function History() {
                     color: '#555',
                     paddingLeft: '24px'
                   }}>
-                    {scan.ingredients.join(', ')}
+                    {scan.nutrition && scan.nutrition.length > 0 
+                    ? scan.nutrition.join(', ') 
+                    : 'Nothing extracted.'}
                   </p>
                 </div>
                 
