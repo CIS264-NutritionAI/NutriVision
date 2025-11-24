@@ -1,8 +1,3 @@
-/*
-import dotenv from 'dotenv';
-dotenv.config();
-*/
-
 export const callAPI = () => {
     console.log("callAPI. Hello World!");
 /*
