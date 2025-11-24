@@ -18,3 +18,4 @@ export const analyzeIngredients = async (text: string): Promise<NERItem[]> => {
   );
   return response.data as NERItem[];
 };
+
