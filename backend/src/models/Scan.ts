@@ -5,17 +5,8 @@ const { Schema } = mongoose;
 interface ScanAttributes {
     _id: string; 
     name: string; 
-    ingredients: string[]; // Array of strings
+    nutrition: string[]; // Array of strings
     allergens: string[]; 
-    nutrition: { 
-        calories?: number; 
-        fat?: number; 
-        cholesterol?: number; 
-        sodium?: number; 
-        carbohydrates?: number; 
-        sugar?: number; 
-        protein?: number; 
-    }; 
     imageURL: string; // Path to the saved image
     scannedAt: Date; 
     createdAt: Date; 
@@ -28,36 +19,13 @@ const scanSchema = new mongoose.Schema<ScanAttributes>({
         type: String, 
         required: true, 
     }, 
-    ingredients: { 
+    nutrition: { 
         type: [String], 
         default: [], 
     }, 
     allergens: { 
         type: [String], 
         default: [], 
-    }, 
-    nutrition: { 
-        calories: { 
-            type: Number, 
-        }, 
-        fat: { 
-            type: Number, 
-        }, 
-        cholesterol: { 
-            type: Number, 
-        }, 
-        sodium: {
-            type: Number, 
-        },
-        carbohydrates: { 
-            type: Number, 
-        }, 
-        sugar: { 
-            type: Number, 
-        }, 
-        protein: { 
-            type: Number, 
-        }, 
     }, 
     imageURL: { 
         type: String, 
