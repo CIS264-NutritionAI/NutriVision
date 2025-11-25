@@ -18,6 +18,7 @@ export default function NavBar() {
       <div className="font-peppermint text-lg hidden sm:flex gap-6 items-center">
         <NavButton to="/about" label="about" />
         <NavButton to="/scan" label="scan" />
+        <NavButton to="/search" label="search" />
         <NavButton to="/history" label="history" />
         <NavButton to="/profile" label="profile" />
       </div>
@@ -50,6 +51,7 @@ export default function NavBar() {
         <div className="font-peppermint text-charcoal absolute top-full left-0 right-0 bg-cream flex flex-col items-center shadow-sm space-y-4 p-6 sm:hidden z-50">
           <NavButton to="/about" label="about" onClick={() => setOpen(false)} />
           <NavButton to="/scan" label="scan" onClick={() => setOpen(false)} />
+          <NavButton to="/search" label="search" onClick={() => setOpen(false)} />
           <NavButton to="/history" label="history" onClick={() => setOpen(false)} />
           <NavButton to="/profile" label="profile" onClick={() => setOpen(false)} />
         </div>

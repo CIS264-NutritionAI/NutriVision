@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Scan from "./pages/Scan";
+import Search from "./pages/Search";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import History from "./pages/History";
@@ -19,6 +20,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/scan" element={<Scan />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/history" element={<History />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
