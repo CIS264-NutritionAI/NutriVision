@@ -5,7 +5,7 @@ import scanRoutes from "./routes/scanRoutes.js";
 
 const app = express();
 
-app.use(cors()) // Allow frontend to talk to backend 
+app.use(cors()); 
 app.use(express.json({ limit: '50mb' }));
 
 app.use("/api/ingredients", ingredientRoutes);
