@@ -1,54 +1,37 @@
 import React, { useState } from "react";
-import { callAPI } from "../components/searchAPI";
 
 const Search = () => {
-    const [name, setName] = useState<string>("");
+    const [name, setName] = useState("");
+    const [output, setOutput] = useState("");
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!name.trim()) return alert("Please enter a valid food name");
 
-        if (name.trim() === "") {
-            alert("Please enter a valid food name");
-            return;
-        }
-        callAPI(name);
+        const res = await fetch("http://localhost:5000/api/llama", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                text: `Identify potential toxic ingredients and allergens for: ${name}`
+            }),
+        });
+
+        const data = await res.json();
+        setOutput(JSON.stringify(data, null, 2));
     };
 
     return (
-        <div className="relative w-full overflow-hidden tracking-wide font-peppermint bg-cream">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl pt-12 text-center">
-                search a food.
-            </h1>
-            <h3 className="text-sm sm:text-md md:text-lg lg:text-xl text-center justify-center py-12 mx-6 sm:mx-20">
-                don't have a food label to scan? no problem. search for it below:
-            </h3>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    placeholder="Enter a food item..."
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <button type="submit">Search</button>
+            </form>
 
-            <div className="flex flex-col justify-center items-center">
-                <form
-                    className="bg-cream p-8 rounded-xl shadow-md w-80"
-                    onSubmit={handleSubmit}
-                >
-                    <h2 className="text-2xl font-bold mb-6 text-center">Search</h2>
-
-                    <input
-                        id="text-input"
-                        type="text"
-                        placeholder="Enter a food item..."
-                        className="w-full p-2 mb-3 border rounded"
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-
-                    <button
-                        type="submit"
-                        className="w-full bg-matcha text-cream py-2 rounded hover:bg-green-600 transition"
-                    >
-                        Search
-                    </button>
-                </form>
-
-                <p id="text-output">(output)</p>
-            </div>
+            <pre>{output}</pre>
         </div>
     );
 };
