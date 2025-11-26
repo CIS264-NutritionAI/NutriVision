@@ -1,18 +1,28 @@
-export const callAPI = (search: string) => {
-    const output = document.getElementById('text-output') as HTMLParagraphElement | null;
-    if (!output) return;
+// frontend/src/components/searchAPI.ts
+export interface LlamaResponse {
+  id?: string;
+  object?: string;
+  created?: number;
+  choices?: Array<{ message: { role: string; content: string } }>;
+}
 
-    async function query(search: string) {
-        const response = await fetch("http://localhost:5000/api/llama", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ search }), 
-        });
+// src/components/searchAPI.ts
+export const callAPI = async () => {
+  const prompt = "Identify potential toxic ingredients and allergens for: Oreos";
 
-        return response.json();
-    }
-
-    query(search).then((response) => {
-        output.innerHTML = JSON.stringify(response, null, 2);
+  try {
+    const res = await fetch("http://localhost:3000/api/llama", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: prompt }),
     });
+
+    if (!res.ok) throw new Error(`Backend error: ${res.status}`);
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    return "Error contacting backend. Make sure your server is running.";
+  }
 };

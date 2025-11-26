@@ -1,17 +1,13 @@
+// backend/src/app.ts
 import express from "express";
-import cors from "cors"; 
-import ingredientRoutes from "./routes/ingredientRoutes.js";
-import scanRoutes from "./routes/scanRoutes.js"; 
+import cors from "cors";
+import llamaRouter from "./routes/llama";
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
-app.use("/api/ingredients", ingredientRoutes);
-app.use("/api/scans", scanRoutes);
+app.use("/api/llama", llamaRouter);
 
 export default app;
-
-
-
