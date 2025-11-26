@@ -1,28 +1,25 @@
-// frontend/src/components/searchAPI.ts
-export interface LlamaResponse {
-  id?: string;
-  object?: string;
-  created?: number;
-  choices?: Array<{ message: { role: string; content: string } }>;
-}
-
-// src/components/searchAPI.ts
-export const callAPI = async () => {
-  const prompt = "Identify potential toxic ingredients and allergens for: Oreos";
+export const callAPI = async (input: string): Promise<string> => {
+  const text = `Identify potential toxic ingredients and allergens for: ${input}`;
 
   try {
-    const res = await fetch("http://localhost:3000/api/llama", {
+    const response = await fetch("https://router.huggingface.co/v1/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: prompt }),
+      headers: {
+        Authorization: `Bearer ${process.env.LLAMA_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: [{ role: "user", content: text }],
+        model: "meta-llama/Llama-3.1-8B-Instruct:novita",
+      }),
     });
 
-    if (!res.ok) throw new Error(`Backend error: ${res.status}`);
-
-    const data = await res.json();
-    return data;
-  } catch (err) {
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+    const data = await response.json();
+    const assistantContent = data?.choices?.[0]?.message?.content ?? "No response from assistant";
+    return assistantContent;
+  } catch (err: any) {
     console.error(err);
-    return "Error contacting backend. Make sure your server is running.";
+    return "Error contacting API";
   }
 };
