@@ -1,56 +1,25 @@
-export const callAPI = () => {
-    console.log("callAPI. Hello World!");
-/*
-    const paragraph = document.getElementById('text-input') as HTMLInputElement | null;
-	const output = document.getElementById('text-output') as HTMLParagraphElement | null;
-	if(paragraph){
-		const text: string = "Identify potential toxic ingredients and allergens:" + paragraph.value ;
-		console.log('=========================================')
-    	console.log("text",text);
-    	console.log('=========================================')
+export const callAPI = async (input: string): Promise<string> => {
+  const text = `Identify potential toxic ingredients and allergens for: ${input}`;
 
+  try {
+    const response = await fetch("https://router.huggingface.co/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.LLAMA_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: [{ role: "user", content: text }],
+        model: "meta-llama/Llama-3.1-8B-Instruct:novita",
+      }),
+    });
 
-		async function query(data) {
-		const response = await fetch(
-			"https://router.huggingface.co/v1/chat/completions",
-			{
-				headers: {
-					Authorization: `Bearer {API_KEY}`,
-					"Content-Type": "application/json",
-				},
-				method: "POST",
-				body: JSON.stringify(data),
-			}
-		);
-		const result = await response.json();
-		return result;
-		}
-
-		query({ 
-			messages: [
-				{
-					role: "user",
-					content: text,
-				},
-			],
-			model: "meta-llama/Llama-3.1-8B-Instruct:novita",
-		}).then((response) => {
-			console.log(JSON.stringify(response));
-			
-			//if(output){
-			//	output.innerHTML = response[0]?.generated_text ?? "";
-			//}
-				
-			output.innerHTML = JSON.stringify(response, null, 2);
-		});
-
-
-}
-
-*/
-
-
-   
-
-
-}
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+    const data = await response.json();
+    const assistantContent = data?.choices?.[0]?.message?.content ?? "No response from assistant";
+    return assistantContent;
+  } catch (err: any) {
+    console.error(err);
+    return "Error contacting API";
+  }
+};
